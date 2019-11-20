@@ -42,6 +42,10 @@ public class IndexController {
         }
 
         List<QuestionDTO> questions = questionService.list();
+        for (QuestionDTO question : questions) {
+            question.setDescription("reset");
+        }
+
         System.out.println(questions);
         model.addAttribute("questions", questions);
 
