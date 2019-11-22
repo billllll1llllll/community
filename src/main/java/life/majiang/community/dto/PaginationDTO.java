@@ -12,6 +12,7 @@ public class PaginationDTO {
     private Boolean showFirstPage;
     private Boolean showNext;
     private Boolean showEndPage;
+    private Integer totalPage;
 
     private Integer page;
 
@@ -19,12 +20,20 @@ public class PaginationDTO {
 
     public void setPagination(Integer totalCount, Integer page, Integer size) {
 
-        Integer totalPage;
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
         } else {
             totalPage = totalCount / size + 1;
         }
+
+        if (page < 1) {
+            page = 1;
+        }
+        if (page > totalPage) {
+            page = totalPage;
+        }
+        this.page = page;
+
         pages.clear();
         pages.add(page);
         for (int i = 1; i <= 3; i++) {
