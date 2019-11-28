@@ -6,6 +6,7 @@ import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.Question;
 import life.majiang.community.model.User;
+import life.majiang.community.model.UserExample;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,10 +39,12 @@ public class QuestionService {
         List<QuestionDTO> questionDTOS = new ArrayList<>();
         if (questions != null && questions.size() != 0) {
             for (Question question : questions) {
-                User user = userMapper.findById(question.getCreator());
+                UserExample userExample = new UserExample();
+                userExample.createCriteria().andIdEqualTo(question.getCreator());
+                List<User> users = userMapper.selectByExample(userExample);
                 QuestionDTO questionDTO = new QuestionDTO();
                 BeanUtils.copyProperties(question, questionDTO);
-                questionDTO.setUser(user);
+                questionDTO.setUser(users.get(0));
                 questionDTOS.add(questionDTO);
             }
 
@@ -70,10 +73,12 @@ public class QuestionService {
         List<QuestionDTO> questionDTOS = new ArrayList<>();
         if (questions != null && questions.size() != 0) {
             for (Question question : questions) {
-                User user = userMapper.findById(question.getCreator());
+                UserExample userExample = new UserExample();
+                userExample.createCriteria().andIdEqualTo(question.getCreator());
+                List<User> users = userMapper.selectByExample(userExample);
                 QuestionDTO questionDTO = new QuestionDTO();
                 BeanUtils.copyProperties(question, questionDTO);
-                questionDTO.setUser(user);
+                questionDTO.setUser(users.get(0));
                 questionDTOS.add(questionDTO);
             }
 
@@ -85,9 +90,13 @@ public class QuestionService {
     public QuestionDTO getById(Integer id) {
         QuestionDTO questionDTO = new QuestionDTO();
         Question question = questionMapper.getById(id);
-        User user = userMapper.findById(question.getCreator());
+//        User user = userMapper.findById(question.getCreator());
+        UserExample userExample = new UserExample();
+        userExample.createCriteria()
+                .andIdEqualTo(question.getCreator());
+        List<User> users = userMapper.selectByExample(userExample);
         BeanUtils.copyProperties(question, questionDTO);
-        questionDTO.setUser(user);
+        questionDTO.setUser(users.get(0));
         return questionDTO;
     }
 

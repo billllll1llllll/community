@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li th:if="${pagination.showFirstPage}">
-                        <a th:href="@{/(/profile/question/page=${pagination.page - 1})}" aria-label="Previous">
+                        <a th:href="@{/profile/question/(page=${pagination.page - 1})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;&lt;</span>
 
                         </a>
