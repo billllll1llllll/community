@@ -18,6 +18,8 @@ public class CommentService {
     CommentMapper commentMapper;
     @Autowired(required = false)
     QuestionMapper questionMapper;
+    @Autowired(required = false)
+    QuestionExtMapper questionExtMapper;
 
     public void insert(Comment comment) {
         if (comment.getParentId() == null || comment.getParentId() == 0) {
@@ -42,6 +44,8 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             commentMapper.insert(comment);
+            dbQuestion.setCommentCount(1);
+            questionExtMapper.inCommentCount(dbQuestion);
         }
 
     }
