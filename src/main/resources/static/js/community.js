@@ -1,3 +1,6 @@
+/**
+ * 提交回复
+ */
 function post() {
     var questionId = $("#question_id").val()
     var questionContent = $("#question_content").val()
@@ -37,5 +40,17 @@ function post() {
         dataType: "json"
     })
 
+
+}
+
+
+/**
+ * 展开二级评论
+ */
+function collapseComments(e) {
+
+    var id = e.getAttribute("data-id")
+    var comments = $("#comment-" + id);
+    comments.addClass("in")
 
 }
