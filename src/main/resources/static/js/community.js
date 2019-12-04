@@ -1,12 +1,41 @@
 /**
- * 提交回复
+ * 锟结交锟截革拷
  */
 function post() {
     var questionId = $("#question_id").val()
     var questionContent = $("#question_content").val()
+    console.log("questionId = " + questionId + " , questionContent = " + questionContent)
+    comment2target(questionId, 1, questionContent)
 
-    if (!questionContent) {
-        alert("不能回复空内容")
+}
+
+
+function comment(e) {
+    var id = e.getAttribute("data-id")
+    var content = $("#input-" + id).val();
+    console.log("id = " + id + " , content = " + content)
+    comment2target(id, 2, content)
+}
+
+
+/**
+ * 展锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+ */
+function collapseComments(e) {
+
+    var id = e.getAttribute("data-id")
+    var comments = $("#comment-" + id);
+    if (comments.hasClass("in")) {
+        comments.removeClass("in")
+    } else {
+        comments.addClass("in")
+    }
+}
+
+function comment2target(targetId, type, content) {
+
+    if (!content) {
+        alert("涓嶈兘涓虹┖")
         return
     }
     $.ajax({
@@ -14,9 +43,9 @@ function post() {
         url: "/comment",
         contentType: "application/json",
         data: JSON.stringify({
-            "parentId": questionId,
-            "content": questionContent,
-            "type": 1
+            "parentId": targetId,
+            "content": content,
+            "type": type
         }),
         success: function (response) {
             if (response.code == 200) {
@@ -40,21 +69,5 @@ function post() {
         dataType: "json"
     })
 
-
-}
-
-
-/**
- * 展开二级评论
- */
-function collapseComments(e) {
-
-    var id = e.getAttribute("data-id")
-    var comments = $("#comment-" + id);
-    if (comments.hasClass("in")) {
-        comments.removeClass("in")
-    } else {
-        comments.addClass("in")
-    }
 
 }
