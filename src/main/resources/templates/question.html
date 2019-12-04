@@ -65,51 +65,52 @@
             </div>
 
             <!--回复输入框-->
-            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style=";"/>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style=";">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object img-circle" th:src="${question.user.avatarUrl}"
-                                 src="https://avatars3.githubusercontent.com/u/25083067?v=4"/>
-                        </a>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style=";"/>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style=";">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object img-circle" th:src="${question.user.avatarUrl}"
+                                     src="https://avatars3.githubusercontent.com/u/25083067?v=4"/>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <span th:text="${question.user.name}"></span>
+                            </h4>
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            <span th:text="${question.user.name}"></span>
-                        </h4>
-                    </div>
+                    <input type="hidden" id="question_id" th:value="${question.id}">
+                    <textarea class="form-control comment" id="question_content" rows="6"></textarea>
+                    <button type="button" class="btn btn-success" onclick="post()">回复</button>
                 </div>
-                <input type="hidden" id="question_id" th:value="${question.id}">
-                <textarea class="form-control comment" id="question_content" rows="6"></textarea>
-                <button type="button" class="btn btn-success" onclick="post()">回复</button>
             </div>
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <h4>发起人</h4>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object img-circle" th:src="${question.user.avatarUrl}"
+                                     src="https://avatars3.githubusercontent.com/u/25083067?v=4"/>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <span th:text="${question.user.name}"></span>
+                            </h4>
+                        </div>
+                    </div>
 
-        </div>
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                <h4>发起人</h4>
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object img-circle" th:src="${question.user.avatarUrl}"
-                                 src="https://avatars3.githubusercontent.com/u/25083067?v=4"/>
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            <span th:text="${question.user.name}"></span>
-                        </h4>
-                    </div>
                 </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <h4>相关问题</h4>
 
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                <h4>相关问题</h4>
-
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>
