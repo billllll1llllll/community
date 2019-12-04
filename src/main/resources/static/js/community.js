@@ -28,7 +28,17 @@ function collapseComments(e) {
     if (comments.hasClass("in")) {
         comments.removeClass("in")
     } else {
-        comments.addClass("in")
+
+        $.getJSON("/comment/" + id, function (data) {
+
+            var commentBody = $("comment-body-" + id);
+            commentBody.appendChild()
+
+            console.log(data)
+            comments.addClass("in")
+        })
+
+
     }
 }
 
