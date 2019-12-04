@@ -50,6 +50,16 @@ body {
     border-bottom: 1px solid #999999;
 }
 
+.sub-comments {
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+}
+.sub-comments.btn {
+    margin: 10px;
+}
+
 .comment-sp {
     margin-top: 0px;
 }

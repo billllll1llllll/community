@@ -51,6 +51,10 @@ function collapseComments(e) {
 
     var id = e.getAttribute("data-id")
     var comments = $("#comment-" + id);
-    comments.addClass("in")
+    if (comments.hasClass("in")) {
+        comments.removeClass("in")
+    } else {
+        comments.addClass("in")
+    }
 
 }
