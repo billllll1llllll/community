@@ -15,6 +15,7 @@ import life.majiang.community.model.UserExample;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class QuestionService {
 
     public PaginationDTO list(Integer page, Integer size) {
 
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.opsForValue().set("YY", "hhhhhhhh");
         System.out.println("redisTemplate.opsForValue().get(\"YY\"); = " + redisTemplate.opsForValue().get("YY"));
         List<Question> all = (List<Question>) redisTemplate.opsForValue().get("allQuestion");
