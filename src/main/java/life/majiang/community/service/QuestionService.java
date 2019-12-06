@@ -14,6 +14,7 @@ import life.majiang.community.model.User;
 import life.majiang.community.model.UserExample;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,8 +31,17 @@ public class QuestionService {
     private QuestionExtMapper questionExtMapper;
     @Autowired(required = false)
     private UserMapper userMapper;
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
+
 
     public PaginationDTO list(Integer page, Integer size) {
+
+        redisTemplate.opsForValue().set("YY", "hhhhhhhh");
+        System.out.println("redisTemplate.opsForValue().get(\"YY\"); = " + redisTemplate.opsForValue().get("YY"));
+        List<Question> all = (List<Question>) redisTemplate.opsForValue().get("allQuestion");
+        System.out.println("all = " + all);
+
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
         paginationDTO.setPagination(totalCount, page, size);
