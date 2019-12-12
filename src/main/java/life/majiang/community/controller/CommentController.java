@@ -1,5 +1,9 @@
 package life.majiang.community.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import life.majiang.community.dto.CommentCreateDTO;
 import life.majiang.community.dto.CommentDTO;
 import life.majiang.community.dto.ResultDTO;
@@ -18,11 +22,14 @@ import java.util.List;
 
 
 @Controller
+@Api(description = "评论接口", tags = "评论相关")
 public class CommentController {
 
     @Autowired(required = false)
     CommentService commentService;
 
+
+    @ApiOperation(value = "获取所有评论", notes = "获取所有评论，需要传参")
     @ResponseBody
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
@@ -48,6 +55,8 @@ public class CommentController {
         return ResultDTO.okOf();
     }
 
+    @ApiOperation(value = "获取评论", notes = "根据id查询评论")
+    @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "String")
     @ResponseBody
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
     public ResultDTO comments(@PathVariable(name = "id") Long id) {
